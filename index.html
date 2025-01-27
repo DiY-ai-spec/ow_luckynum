@@ -37,7 +37,7 @@
         input[type="text"],
         select {
             width: 100%;
-            padding: 10px 0px;
+            padding: 8px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -81,8 +81,15 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr("#birthdate", {
-            dateFormat: "Y/m/d",
-            maxDate: "today"
+            dateFormat: "Y/m",
+            maxDate: "today",
+            locale: {
+                firstDayOfWeek: 1
+            },
+            // 针对手机端优化
+            enableMobile: true,
+            altInput: true,
+            altFormat: "Y/m"
         });
 
         function getRandomNumbers(seed, count, min, max) {
@@ -113,7 +120,7 @@
             const today = new Date();
 
             const seed = Date.UTC(birthdate.getFullYear(), birthdate.getMonth(), 1) +
-                (gender === 'male' ? 1 : 2) +
+                (gender ==='male'? 1 : 2) +
                 Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
 
             const luckyNumbers = getRandomNumbers(seed, 3, 1, 9);
